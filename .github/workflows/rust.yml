@@ -12,7 +12,7 @@ env:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
     - name: Check Formatting
@@ -20,13 +20,11 @@ jobs:
     - name: Check Clippy
       run: cargo clippy -- -D warnings
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup
-      run: rustup target add x86_64-pc-windows-gnu
     - name: Build
-      run: cargo build --release --target x86_64-pc-windows-gnu
+      run: cargo build --release
     - name: Upload Binary
       uses: actions/upload-artifact@v4
       with:
@@ -39,7 +37,7 @@ jobs:
         path: static/**
   upload:
     name: Upload new build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     if: github.ref == 'refs/heads/release'
     needs:
       - build
