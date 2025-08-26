@@ -56,8 +56,7 @@ fn load_image_filenames() -> Vec<String> {
     let config = get_config();
     fs::read_dir(Path::new(&config.base_path).join(&config.char_img_path))
         .expect("Could not open char_img_path")
-        .filter(|f| f.is_ok())
-        .map(|f| f.unwrap())
+        .flatten()
         .map(|f| f.file_name().to_str().unwrap().to_string())
         .collect()
 }
@@ -90,13 +89,14 @@ pub fn get_filename(
     player_2: &str,
     extension: &str,
 ) -> PathBuf {
-    PathBuf::from(if round_name != "" {
+    PathBuf::from(if !round_name.is_empty() {
         format!("{tournament_name} - {round_name} - {player_1} vs {player_2}.{extension}")
     } else {
         format!("{tournament_name} - {player_1} vs {player_2}.{extension}")
     })
 }
 
+#[allow(clippy::too_many_arguments)]
 pub fn write_thumbnail(
     filename: impl AsRef<Path>,
     tournament_name: &str,
@@ -215,6 +215,6 @@ fn rgba8_to_rgb8(input: ImageBuffer<Rgba<u8>, Vec<u8>>) -> ImageBuffer<Rgb<u8>, 
 #[cached(key = "String", convert = r#"{ String::from(filename) }"#)]
 fn load_image(filename: &str) -> RgbaImage {
     open(Path::new(&get_config().base_path).join(filename))
-        .expect(&format!("Couldn't open {filename}"))
+        .unwrap_or_else(|_| panic!("Couldn't open {filename}"))
         .to_rgba8()
 }

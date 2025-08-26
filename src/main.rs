@@ -6,7 +6,6 @@ use iced::{
     window::Settings,
     Element, Task,
 };
-use rfd;
 mod img;
 use img::{get_filename, write_thumbnail};
 mod video;
@@ -41,7 +40,7 @@ enum Message {
     Fighter2(String),
     StartTime(String),
     EndTime(String),
-    UpdateMessage(String),
+    UpdateMsg(String),
     GenerateThumbnail(bool),
     GenerateVideo(bool),
     Submit,
@@ -191,15 +190,15 @@ impl App {
                             );
                             msg.push_str(" generating video");
                         }
-                        msg.push_str("!");
+                        msg.push('!');
                         msg
                     })
                     .await
                     .unwrap();
-                    Message::UpdateMessage(msg)
+                    Message::UpdateMsg(msg)
                 });
             }
-            Message::UpdateMessage(message) => {
+            Message::UpdateMsg(message) => {
                 self.message = message;
                 return Task::done(Message::End);
             }
@@ -209,7 +208,7 @@ impl App {
                 crate::img::reload_config();
             }
         }
-        Task::done(Message::UpdateMessage(String::new()))
+        Task::done(Message::UpdateMsg(String::new()))
     }
 
     fn view(&self) -> Element<Message> {
@@ -229,7 +228,7 @@ impl App {
                         TextInput::new("", &self.input_file)
                             .width(iced::Length::FillPortion(5))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::InputFile(message)),
+                            .on_input(Message::InputFile),
                     )
                     .push(
                         Button::new(Text::new("Browse..."))
@@ -251,7 +250,7 @@ impl App {
                         TextInput::new("", &self.output_folder)
                             .width(iced::Length::FillPortion(5))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::OutputFolder(message)),
+                            .on_input(Message::OutputFolder),
                     )
                     .push(
                         Button::new(Text::new("Browse..."))
@@ -273,7 +272,7 @@ impl App {
                         TextInput::new("", &self.tournament_name)
                             .width(iced::Length::FillPortion(5))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::TournamentName(message)),
+                            .on_input(Message::TournamentName),
                     ),
             )
             .push(
@@ -290,7 +289,7 @@ impl App {
                         TextInput::new("", &self.round_name)
                             .width(iced::Length::FillPortion(5))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::RoundName(message)),
+                            .on_input(Message::RoundName),
                     ),
             )
             .push(
@@ -307,7 +306,7 @@ impl App {
                         TextInput::new("", &self.date)
                             .width(iced::Length::FillPortion(5))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::Date(message)),
+                            .on_input(Message::Date),
                     ),
             )
             .push(
@@ -324,7 +323,7 @@ impl App {
                         TextInput::new("", &self.player_1)
                             .width(iced::Length::FillPortion(4))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::Player1(message)),
+                            .on_input(Message::Player1),
                     )
                     .push(
                         pick_list(char_imgs.clone(), Some(&self.fighter_1), Message::Fighter1)
@@ -345,7 +344,7 @@ impl App {
                         TextInput::new("", &self.player_2)
                             .width(iced::Length::FillPortion(4))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::Player2(message)),
+                            .on_input(Message::Player2),
                     )
                     .push(
                         pick_list(char_imgs.clone(), Some(&self.fighter_2), Message::Fighter2)
@@ -366,13 +365,13 @@ impl App {
                         TextInput::new("", &self.start_time)
                             .width(iced::Length::FillPortion(1))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::StartTime(message)),
+                            .on_input(Message::StartTime),
                     )
                     .push(
                         TextInput::new("", &self.end_time)
                             .width(iced::Length::FillPortion(1))
                             .align_x(iced::alignment::Horizontal::Left)
-                            .on_input(|message| Message::EndTime(message)),
+                            .on_input(Message::EndTime),
                     ),
             )
             .push(

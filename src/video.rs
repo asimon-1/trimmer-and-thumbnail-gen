@@ -9,17 +9,17 @@ pub fn trim_video(
     end_time: &str,
 ) {
     let output = Command::new(ffmpeg_path)
-        .args(&[
+        .args([
             "-ss",
             start_time,
             "-to",
             end_time,
             "-i",
-            &input_path,
+            input_path,
             "-c",
             "copy",
             "-y",
-            &output_path,
+            output_path,
         ])
         .output()
         .expect("ffmpeg call failed");
