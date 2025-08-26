@@ -1,0 +1,58 @@
+{
+    "width": 1920,
+    "height": 1080,
+    "base_path": "static",
+    "char_img_path": "characters",
+    "font": "LEMONMILK-Bold.otf",
+    "background_images": [
+        "Thumbnail_Background.png"
+    ],
+    "foreground_images": [
+        "Player_Banner.png",
+        "Tournament_Banner.png"
+    ],
+    "positioned_texts": [
+        {
+            "text": "TOURNAMENT_NAME",
+            "x": 960,
+            "y": 70,
+            "scale": 100.0,
+            "theta": 0.0
+        },
+        {
+            "text": "PLAYER_1",
+            "x": 400,
+            "y": 822,
+            "scale": 100.0,
+            "theta": 0.100
+        },
+        {
+            "text": "PLAYER_2",
+            "x": 1520,
+            "y": 822,
+            "scale": 100.0,
+            "theta": 6.183
+        },
+        {
+            "text": "ROUND_NAME",
+            "x": 268,
+            "y": 950,
+            "scale": 60.0,
+            "theta": 0.090
+        },
+        {
+            "text": "DATE",
+            "x": 1652,
+            "y": 950,
+            "scale": 60.0,
+            "theta": 6.193
+        },
+        {
+            "text": "Portrait Art by @ElevenZM",
+            "x": 1770,
+            "y": 1050,
+            "scale": 20.0,
+            "theta": 0.0
+        }
+    ]
+}
