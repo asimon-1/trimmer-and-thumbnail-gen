@@ -211,7 +211,7 @@ impl App {
         Task::done(Message::UpdateMsg(String::new()))
     }
 
-    fn view(&self) -> Element<Message> {
+    fn view(&self) -> Element<'_, Message> {
         let char_imgs = CHAR_IMGS.read().expect("Poisoned!").clone();
         Column::new()
             .push(
