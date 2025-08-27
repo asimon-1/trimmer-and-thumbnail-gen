@@ -18,7 +18,7 @@ jobs:
     - name: Check Formatting
       run: cargo fmt --all -- --check
     - name: Install Rust GNU toolchain
-      run: rustup toolchain install stable-x86_64-pc-windows-gnu
+      run: rustup target add x86_64-pc-windows-msvc
     - name: Check Clippy
       run: cargo clippy -- -D warnings
   build:
@@ -26,11 +26,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install Rust GNU toolchain
-      run: rustup toolchain install stable-x86_64-pc-windows-gnu
+      run: rustup toolchain install x86_64-pc-windows-msvc
     - name: Set default toolchain
-      run: rustup default stable-x86_64-pc-windows-gnu
+      run: rustup default x86_64-pc-windows-msvc
     - name: Build
-      run: cargo build --release --target x86_64-pc-windows-gnu
+      run: cargo build --release --target x86_64-pc-windows-msvc
 
     - name: Upload Binary
       uses: actions/upload-artifact@v4
