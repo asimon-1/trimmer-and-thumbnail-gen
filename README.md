@@ -62,9 +62,10 @@ trimmer-and-thumbnail-gen/
     ├── overlay_template.png
     └── characters/
         │
-        ├── mario.png
+        ├── mickey_mouse_left.png
+        ├── mickey_mouse_right.png
         ├── ...
-        └── bowser.png
+        └── popeye_right.png
 ```
 
 ## Configuration: `config.json`
@@ -81,51 +82,53 @@ The application uses a `config.json` file found in the `static` directory to con
     "char_img_path": "characters",
     "font": "LEMONMILK-Bold.otf",
     "background_images": [
-        "Thumbnail_Background.png"
+        "background.png"
     ],
     "foreground_images": [
-        "Player_Banner.png",
-        "Tournament_Banner.png"
+        "lower_banner.png",
+        "upper_banner.png",
+        "icon.png",
+        "versus.png"
     ],
     "positioned_texts": [
         {
             "text": "TOURNAMENT_NAME",
-            "x": 960,
-            "y": 70,
-            "scale": 100.0,
-            "theta": 0.0
+            "x": 475,
+            "y": 105,
+            "scale": 60.0,
+            "theta": 6.215
         },
         {
             "text": "PLAYER_1",
-            "x": 400,
-            "y": 822,
+            "x": 525,
+            "y": 882,
             "scale": 100.0,
-            "theta": 0.100
+            "theta": 6.215
         },
         {
             "text": "PLAYER_2",
-            "x": 1520,
-            "y": 822,
+            "x": 1460,
+            "y": 882,
             "scale": 100.0,
-            "theta": 6.183
+            "theta": 6.215
         },
         {
             "text": "ROUND_NAME",
-            "x": 268,
-            "y": 950,
-            "scale": 60.0,
-            "theta": 0.090
+            "x": 1250,
+            "y": 118,
+            "scale": 50.0,
+            "theta": 6.215
         },
         {
             "text": "DATE",
-            "x": 1652,
-            "y": 950,
-            "scale": 60.0,
-            "theta": 6.193
+            "x": 1600,
+            "y": 97,
+            "scale": 50.0,
+            "theta": 6.215
         },
         {
-            "text": "Portrait Art by @ElevenZM",
-            "x": 1770,
+            "text": "Thumbnail by asimon-1@Github",
+            "x": 180,
             "y": 1050,
             "scale": 20.0,
             "theta": 0.0
@@ -179,6 +182,12 @@ You can add as many positioned text objects as needed to customize what appears 
 
 To fine-tune the thumbnail image styling, you can iteratively adjust the `config.json` file, pressing the "Reload Config" button and re-submitting the thumbnail generation task.
 
+Input:
+![Thumbnail Inputs](https://github.com/asimon-1/trimmer-and-thumbnail-gen/blob/main/docs/example_input.jpg)
+
+Output:
+![Thumbnail Output](https://github.com/asimon-1/trimmer-and-thumbnail-gen/blob/main/docs/Awesome%20Tourney%20Name%20-%20Grand%20Finals%20-%20Mickey%20vs%20Popeye.jpg)
+
 ## Contributing
 
 Pull requests are welcome!
@@ -192,4 +201,3 @@ Feel free to use or adapt it as you see fit.
 ## Acknowledgements
 
 - Uses [ffmpeg](https://ffmpeg.org/) for video processing
-- For the Super Smash Brothers character art provided in `static/characters`, the original art is created by Yusuke Nakano. ElevenZM isolated each character.
