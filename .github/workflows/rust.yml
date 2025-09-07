@@ -49,20 +49,3 @@ jobs:
       with:
         name: trimmer-and-thumbnail-gen
         path: trimmer-and-thumbnail-gen
-
-  release:
-    name: Upload new build
-    runs-on: windows-latest
-    if: github.ref == 'refs/heads/release'
-    needs:
-      - build
-    steps:
-      - name: Download zip artifact
-        uses: actions/download-artifact@v5
-        with:
-          name: trimmer-and-thumbnail-gen
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: "latest"
-          files: trimmer-and-thumbnail-gen.zip
