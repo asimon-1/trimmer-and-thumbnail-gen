@@ -26,17 +26,15 @@ jobs:
     - name: Build
       run: cargo build --release --target x86_64-pc-windows-msvc
 
-    - name: Upload Binary
-      uses: actions/upload-artifact@v4
-      with:
-        name: binary
-        path: target/release/video-trimmer.exe
+    - name: Prepare Zip
+      run: Compress-Archive -Path "target/x86_64-pc-windows-msvc/release/trimmer-and-thumbnail-gen.exe","static" -DestinationPath trimmer-and-thumbnail-gen.zip
 
-    - name: Upload Resources
+    - name: Upload Zip
       uses: actions/upload-artifact@v4
       with:
-        name: resources
-        path: static/**
+        name: upload
+        path: trimmer-and-thumbnail-gen.zip
+
   upload:
     name: Upload new build
     runs-on: windows-latest
