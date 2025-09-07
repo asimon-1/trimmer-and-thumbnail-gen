@@ -2,5 +2,3 @@ debug
 target
 **/*.rs.bk
 *.pdb
-*.jpg
-cargo.lock
